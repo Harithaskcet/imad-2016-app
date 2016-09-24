@@ -5,26 +5,46 @@ var path = require('path');
 var app = express();
 app.use(morgan('combined'));
 
-
-var articleOne={
-    title: 'Article one | Haritha Kumar ',
-    heading: 'Article one',
-    date: 'september 24,2016',
-    content: ` <p>
-                    THIS IS MY ARTICLE ONE WEB PAGE.THIS IS MY ARTICLE ONE WEB PAGE.THIS IS MY ARTICLE ONE WEB PAGE
-                    THIS IS MY CONTENT.THIS IS MY ARTICLE ONE WEB PAGE.THIS IS MY ARTICLE ONE WEB PAGE.THIS IS MY ARTICLE ONE WEB PAGE
-                    THIS IS MY CONTENT.THIS IS MY ARTICLE ONE WEB PAGE
-                    THIS IS MY CONTENT
-                    THIS IS MY CONTENT.THIS IS MY ARTICLE ONE WEB PAGE.THIS IS MY ARTICLE ONE WEB PAGE
-                    THIS IS MY CONTENT
-                    THIS IS MY CONTENT
-                    THIS IS MY CONTENT.THIS IS MY ARTICLE ONE WEB PAGE
-                    THIS IS MY CONTENT.THIS IS MY ARTICLE ONE WEB PAGE
-                    THIS IS MY CONTENT.THIS IS MY ARTICLE ONE WEB PAGE
-                    THIS IS MY CONTENT
-                   
-                </p> `
-    
+var articles = {
+     'articleone' : {
+                    title: 'Article one | Haritha Kumar',
+                    heading: 'Article one',
+                    date: 'september 24,2016',
+                    content: ` <p>
+                                    THIS IS MY ARTICLE ONE WEB PAGE.THIS IS MY ARTICLE ONE WEB PAGE.THIS IS MY ARTICLE ONE WEB PAGE
+                                    THIS IS MY CONTENT.THIS IS MY ARTICLE ONE WEB PAGE.THIS IS MY ARTICLE ONE WEB PAGE.THIS IS MY ARTICLE ONE WEB PAGE
+                                    THIS IS MY CONTENT.THIS IS MY ARTICLE ONE WEB PAGE
+                                    THIS IS MY CONTENT
+                                    THIS IS MY CONTENT.THIS IS MY ARTICLE ONE WEB PAGE.THIS IS MY ARTICLE ONE WEB PAGE
+                                    THIS IS MY CONTENT
+                                    THIS IS MY CONTENT
+                                    THIS IS MY CONTENT.THIS IS MY ARTICLE ONE WEB PAGE
+                                    THIS IS MY CONTENT.THIS IS MY ARTICLE ONE WEB PAGE
+                                    THIS IS MY CONTENT.THIS IS MY ARTICLE ONE WEB PAGE
+                                    THIS IS MY CONTENT
+                                   
+                                </p>`
+                    },
+     'articletwo' : {
+                    title: 'Article two | Haritha Kumar ',
+                    heading: 'Article two',
+                    date: 'september 24,2016',
+                    content: ` <p>
+                                    THIS IS MY SECOND WEB PAGE. THE CONTENTS ARE DISPLAYED
+                                   
+                                </p> `
+                        
+                 },
+     'articlethree' : {
+                        title: 'Article three | Haritha Kumar ',
+                        heading: 'Article three',
+                        date: 'september 24,2016',
+                        content: ` <p>
+                                        THIS IS MY THIRD WEB PAGE. THE CONTENTS ARE DISPLAYED
+                                       
+                                    </p> `
+                            
+                     },
 };
 
 function createTemplate(data){
@@ -72,17 +92,11 @@ app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
 
-app.get('/articleone',function (req, res){
-   res.send(createTemplate(articleOne));
+app.get('/:articleName',function (req, res){
+    var articleName= req.params.articleName;
+   res.send(createTemplate(articles[articleName]));
 });
 
-app.get('/articletwo',function (req, res){
-    res.sendFile(path.join(__dirname, 'ui', 'articletwo.html'));
-});
-
-app.get('/articlethree',function (req, res){
-    res.sendFile(path.join(__dirname, 'ui', 'articlethree.html'));
-});
 
 app.get('/ui/style.css', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'style.css'));
