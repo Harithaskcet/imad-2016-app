@@ -21,8 +21,8 @@ body {
 }
 
 .container{
-            max-width= 800px;
-            margin= 0 px;
+            max-width: 800px;
+            margin: 0 auto;
             color: violet;
             font-family: sans-serif;
         }
